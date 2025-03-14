@@ -1,12 +1,14 @@
 from flask import Flask
-from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-CORS(app)
 
-@app.route('/check_connection', methods=['GET'])
-def check_connection():
-    return 'true'
+
+@app.route('/')
+def hello_world():
+    test_var = os.getenv('TEST_VAR', 'Переменная не задана')
+    return f'<h2>{test_var}</h2>'
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
