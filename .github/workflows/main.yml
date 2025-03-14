@@ -26,7 +26,7 @@ jobs:
 
       - name: Copy files via rsync
         run: |
-          rsync -av --delete --exclude=".env" --exclude=".git/" --exclude=".github/" ./ ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }}:~/stacks/python/app/
+          rsync -av --delete --exclude=".env" --exclude=".git/" --exclude=".github/" ./ ${{ vars.SERVER_USER }}@${{ vars.SERVER_HOST }}:~/stacks/schApi/app/
 
       - name: Build and deploy with Docker
         uses: appleboy/ssh-action@master
@@ -35,5 +35,5 @@ jobs:
           username: ${{ vars.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/stacks/python
+            cd ~/stacks/schApi
             docker compose up --build -d
